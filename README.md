@@ -19,26 +19,12 @@ without internet or a smartphone.
 
 *A demo service with made-up callers.*
 
-## How it works
+## How it works, and how it performs
 
-![PhoneStream.exe on the church PC sends 16 kHz audio over TLS (port 443) to your server (Apache, then Node.js), which records the service and sends one stream per call in 8 kHz mu-law to Plivo, which plays it over the phone network to callers](docs/flow.svg)
+![How it works, with measured performance: PhoneStream.exe on the church PC (4% of one CPU core, 22 MB) sends 16 kHz audio over TLS on port 443 (260 kbps, 14 ms round trip) to your server, Apache then Node.js, which records the service and keeps each caller's place. On one CPU core with 10, 50 and 100 callers the server used 4.8%, 8.3% and 11.6% CPU and 61, 64 and 70 MB, sent 0.9, 4.6 and 9.3 Mbps, with about 120 ms delay to callers and no pauses. It sends one stream per call, 8 kHz mu-law at 93 kbps, to Plivo, which keeps 1 s queued as a cushion and plays it over the phone network. Live callers hear the service about 1.2 s after the room plus the phone network's delay.](docs/overview.svg)
 
-## Performance
-
-The server on one CPU core (`server/test/bench.mjs`, Intel i9-10900X), with
-callers listening live for 60 seconds:
-
-| Callers | Server CPU | Memory | Sent to callers | Delay to callers |
-| ---: | ---: | ---: | ---: | ---: |
-| 10 | 4.8% | 61 MB | 0.9 Mbps | 118 ms |
-| 50 | 8.3% | 64 MB | 4.6 Mbps | 120 ms |
-| 100 | 11.6% | 70 MB | 9.3 Mbps | 118 ms |
-
-Every caller got all its audio with no pauses. On a real one-vCPU VM behind
-Apache, 100 pretend calls over the internet did too, and at 50 callers the
-whole VM used about 10% CPU. Live callers hear the service about 1.2 seconds
-after the room, plus the phone network's delay. The app uses about 4% of one
-core and 22 MB.
+On a real one-vCPU VM behind Apache, 100 pretend calls over the internet also
+played with no pauses, and at 50 callers the whole VM used about 10% CPU.
 
 ## Getting started
 
