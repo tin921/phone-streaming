@@ -1,0 +1,22 @@
+[Unit]
+Description=Church phone stream server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=phonestream
+Group=phonestream
+EnvironmentFile=/etc/phone-stream/phone-stream.env
+Environment=DATA_DIR=/var/lib/phone-stream
+ExecStart=/usr/bin/node /opt/phone-stream/main.js
+Restart=always
+RestartSec=2
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+ReadWritePaths=/var/lib/phone-stream
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

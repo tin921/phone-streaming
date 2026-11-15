@@ -1,0 +1,5 @@
+# LF everywhere: the server files go to Linux as they are (make-vm-install.ps1
+# refuses CRLF), and the rest builds and runs fine with LF on Windows.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
