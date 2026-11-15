@@ -19,6 +19,10 @@ without internet or a smartphone.
 
 *A demo service with made-up callers.*
 
+## How it works
+
+![PhoneStream.exe on the church PC sends 16 kHz audio over TLS (port 443) to your server (Apache, then Node.js), which records the service and sends one stream per call in 8 kHz mu-law to Plivo, which plays it over the phone network to callers](docs/how-it-works.svg)
+
 ## Performance
 
 The server on one CPU core (`server/test/bench.mjs`, Intel i9-10900X), with

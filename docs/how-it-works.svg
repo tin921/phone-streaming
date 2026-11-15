@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="200" viewBox="0 0 1080 200" role="img" aria-labelledby="title desc">
+  <title id="title">How Church Phone Stream works</title>
+  <desc id="desc">PhoneStream.exe on the church PC captures what the PC plays and sends it as 16 kHz audio over one WebSocket with TLS on port 443 to your server, where Apache passes it to the Node.js server, which records the service and keeps each caller's place. The server sends one WebSocket per call, in 8 kHz mu-law, to Plivo, which plays it over the phone network to callers on any phone, who press 1 for live.</desc>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; text-anchor: middle; }
+    .bg { fill: #f6f8fa; }
+    .box { fill: #ffffff; stroke: #d0d7de; stroke-width: 1; }
+    .kicker { fill: #57606a; font-size: 11px; font-weight: 600; letter-spacing: 0.8px; }
+    .title { fill: #1f2328; font-size: 15px; font-weight: 600; }
+    .body { fill: #57606a; font-size: 12px; }
+    .label { fill: #57606a; font-size: 11.5px; }
+    .arrow { stroke: #0969da; stroke-width: 2; fill: none; }
+    .head { fill: #0969da; }
+    .icon { stroke: #0969da; stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    .dot { fill: #0969da; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #161b22; }
+      .box { fill: #0d1117; stroke: #30363d; }
+      .kicker, .body, .label { fill: #8b949e; }
+      .title { fill: #e6edf3; }
+      .arrow, .icon { stroke: #4493f8; }
+      .head, .dot { fill: #4493f8; }
+    }
+  </style>
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path class="head" d="M0 0 L10 5 L0 10 Z"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1080" height="200" rx="12"/>
+
+  <!-- Church PC -->
+  <rect class="box" x="24" y="28" width="184" height="144" rx="10"/>
+  <g class="icon">
+    <rect x="103" y="45" width="26" height="18" rx="2"/>
+    <path d="M116 63 V69 M109 70 H123"/>
+  </g>
+  <text class="kicker" x="116" y="92">CHURCH PC</text>
+  <text class="title" x="116" y="114">PhoneStream.exe</text>
+  <text class="body" x="116" y="136">captures what</text>
+  <text class="body" x="116" y="153">the PC plays</text>
+
+  <!-- Your server -->
+  <rect class="box" x="306" y="28" width="184" height="144" rx="10"/>
+  <g class="icon">
+    <rect x="386" y="45" width="24" height="10" rx="2"/>
+    <rect x="386" y="59" width="24" height="10" rx="2"/>
+  </g>
+  <circle class="dot" cx="391" cy="50" r="1.4"/>
+  <circle class="dot" cx="391" cy="64" r="1.4"/>
+  <text class="kicker" x="398" y="92">YOUR SERVER</text>
+  <text class="title" x="398" y="114">Apache → Node.js</text>
+  <text class="body" x="398" y="136">records the service,</text>
+  <text class="body" x="398" y="153">keeps each caller's place</text>
+
+  <!-- Plivo -->
+  <rect class="box" x="588" y="28" width="184" height="144" rx="10"/>
+  <path class="icon" d="M670 69 H690 A5 5 0 0 0 690 59 A7.5 7.5 0 0 0 676 54 A5.5 5.5 0 0 0 670 62 A3.5 3.5 0 0 0 670 69 Z"/>
+  <text class="kicker" x="680" y="92">PHONE SERVICE</text>
+  <text class="title" x="680" y="114">Plivo</text>
+  <text class="body" x="680" y="136">answers each call,</text>
+  <text class="body" x="680" y="153">plays its stream</text>
+
+  <!-- Callers -->
+  <rect class="box" x="870" y="28" width="184" height="144" rx="10"/>
+  <g class="icon">
+    <rect x="954" y="43" width="16" height="27" rx="3"/>
+    <path d="M959 65 H965"/>
+  </g>
+  <text class="kicker" x="962" y="92">CALLERS</text>
+  <text class="title" x="962" y="114">Any phone</text>
+  <text class="body" x="962" y="136">landline or mobile,</text>
+  <text class="body" x="962" y="153">press 1 for live</text>
+
+  <!-- Arrows -->
+  <path class="arrow" d="M216 100 H297" marker-end="url(#arrowhead)"/>
+  <text class="label" x="257" y="90">TLS, port 443</text>
+  <text class="label" x="257" y="118">16 kHz audio</text>
+
+  <path class="arrow" d="M498 100 H579" marker-end="url(#arrowhead)"/>
+  <text class="label" x="539" y="90">one per call</text>
+  <text class="label" x="539" y="118">8 kHz μ-law</text>
+
+  <path class="arrow" d="M780 100 H861" marker-end="url(#arrowhead)"/>
+  <text class="label" x="821" y="90">phone</text>
+  <text class="label" x="821" y="118">network</text>
+</svg>
