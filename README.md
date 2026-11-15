@@ -21,10 +21,8 @@ without internet or a smartphone.
 
 ## How it works, performance and cost
 
-![How it works, with performance and cost: PhoneStream.exe on the church PC (4% of one CPU core, 22 MB) sends just one stream, however many people call, over TLS on port 443 (16 kHz, 260 kbps, 14 ms round trip) to your internet server, a Linux VM with Apache then Node.js, which records the service and keeps each caller's place. On one CPU core with 10, 50 and 100 callers the server used 4.8%, 8.3% and 11.6% CPU and 61, 64 and 70 MB, sent 0.9, 4.6 and 9.3 Mbps, with about 120 ms delay to callers and no pauses. It sends one stream per call, 8 kHz mu-law at 93 kbps, to Plivo, which keeps 1 s queued as a cushion. With four 90-minute services a month, Plivo costs $20.30, $99.50 and $198.50 a month for 10, 50 and 100 callers on a local number, or $65.80, $325 and $649 on a toll-free number. Live callers hear the service about 1.2 s after the room plus the phone network's delay.](docs/flow-and-cost.svg)
+![How it works, with performance and cost: PhoneStream.exe on the church PC (4% of one CPU core, 22 MB) sends just one stream, however many people call, over TLS on port 443 (16 kHz, 260 kbps, 14 ms round trip) to your internet server, a Linux VM with Apache then Node.js, which records the service and keeps each caller's place. Benchmarked on one core of a desktop PC (not the VM), with 10, 50 and 100 callers the server used 4.8%, 8.3% and 11.6% CPU and 61, 64 and 70 MB, sent 0.9, 4.6 and 9.3 Mbps, with about 120 ms delay to callers and no pauses. On the real one-vCPU internet VM, 100 callers played with no pauses, and with 50 the whole VM used about 10% CPU. It sends one stream per call, 8 kHz mu-law at 93 kbps, to Plivo, which keeps 1 s queued as a cushion. With four 90-minute services a month, Plivo costs $20.30, $99.50 and $198.50 a month for 10, 50 and 100 callers on a local number, or $65.80, $325 and $649 on a toll-free number. Live callers hear the service about 1.2 s after the room plus the phone network's delay.](docs/diagram.svg)
 
-On a real one-vCPU VM behind Apache, 100 pretend calls over the internet also
-played with no pauses, and at 50 callers the whole VM used about 10% CPU.
 Plivo's costs are from its [US price list](https://www.plivo.com/voice/pricing/us/)
 (November 2026), which includes audio streaming; check it before budgeting.
 

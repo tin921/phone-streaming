@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="970" viewBox="0 0 560 970" role="img" aria-labelledby="title desc">
+  <title id="title">How Church Phone Stream works, with measured performance and Plivo's monthly cost</title>
+  <desc id="desc">PhoneStream.exe on the church PC captures what the PC plays, using about 4% of one CPU core and 22 MB, and sends 16 kHz audio at about 260 kbps over one WebSocket with TLS on port 443 (14 ms round trip) to your internet server: just one stream, however many people call. There Apache passes it to the Node.js server, which records the service and keeps each caller's place. Benchmarked on one CPU core of a desktop PC (Intel i9-10900X), not the VM, the server used 4.8% CPU and 61 MB with 10 callers, 8.3% and 64 MB with 50, and 11.6% and 70 MB with 100, sending 0.9, 4.6 and 9.3 Mbps, with a median delay to callers of about 120 ms, and every caller got all audio with no pauses. On the real one-vCPU internet VM, 100 callers played with no pauses, and with 50 the whole VM used about 10% CPU and the server 60 MB. The server sends one WebSocket per call, 8 kHz mu-law, about 93 kbps each, to Plivo, which keeps 1 second queued as a cushion and plays it over the phone network. With four 90-minute services a month, Plivo costs about $20.30 a month for 10 callers, $99.50 for 50 and $198.50 for 100 on a local number, or $65.80, $325 and $649 on a toll-free number (US prices, November 2026). Callers use any phone; live callers hear the service about 1.2 seconds after the room, plus the phone network's delay.</desc>
+  <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif; }
+    .bg { fill: #f6f8fa; }
+    .box { fill: #ffffff; stroke-width: 2; }
+    .kicker { font-size: 13px; font-weight: 700; letter-spacing: 1px; }
+    .title { fill: #1f2328; font-size: 22px; font-weight: 600; }
+    .body { fill: #424a53; font-size: 16px; }
+    .label { font-size: 15px; font-weight: 600; }
+    .sublabel { font-size: 14px; font-weight: 500; }
+    .chip { font-size: 13px; font-weight: 600; text-anchor: middle; }
+    .th { fill: #59636e; font-size: 13px; font-weight: 600; text-anchor: end; }
+    .td { fill: #1f2328; font-size: 15px; text-anchor: end; font-variant-numeric: tabular-nums; }
+    .caption { font-size: 13px; font-weight: 700; }
+    .vm { fill: #1f2328; font-size: 13px; font-weight: 500; }
+    .note { fill: #59636e; font-size: 12px; }
+    .rule { stroke: #d0d7de; stroke-width: 1; }
+    .arrow { stroke-width: 3; fill: none; }
+    .icon { stroke-width: 1.8; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+    /* Inside the boxes: white in both themes. */
+    .s1 { stroke: #0969da; } .f1 { fill: #0969da; } .h1 { fill: #ddf4ff; }
+    .s2 { stroke: #8250df; } .f2 { fill: #8250df; } .h2 { fill: #f3e8ff; }
+    .s3 { stroke: #1a7f37; } .f3 { fill: #1a7f37; } .h3 { fill: #dafbe1; }
+    .s4 { stroke: #d1580a; } .f4 { fill: #d1580a; } .h4 { fill: #fff1e5; }
+    /* Between the boxes: on the background, so they follow the theme. */
+    .a1 { stroke: #0969da; } .l1 { fill: #0969da; }
+    .a2 { stroke: #8250df; } .l2 { fill: #8250df; }
+    .a3 { stroke: #1a7f37; } .l3 { fill: #1a7f37; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #1c2128; }
+      .a1 { stroke: #58a6ff; } .l1 { fill: #58a6ff; }
+      .a2 { stroke: #c297ff; } .l2 { fill: #c297ff; }
+      .a3 { stroke: #56d364; } .l3 { fill: #56d364; }
+    }
+  </style>
+  <defs>
+    <marker id="head1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path class="l1" d="M0 0 L10 5 L0 10 Z"/></marker>
+    <marker id="head2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path class="l2" d="M0 0 L10 5 L0 10 Z"/></marker>
+    <marker id="head3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path class="l3" d="M0 0 L10 5 L0 10 Z"/></marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="560" height="970" rx="14"/>
+
+  <!-- Church PC -->
+  <rect class="box s1" x="20" y="24" width="520" height="118" rx="12"/>
+  <circle class="h1" cx="64" cy="70" r="26"/>
+  <g class="icon s1" transform="translate(64 69) scale(1.3)">
+    <rect x="-13" y="-11" width="26" height="18" rx="2"/>
+    <path d="M0 7 V13 M-7 14 H7"/>
+  </g>
+  <text class="kicker f1" x="108" y="51">CHURCH PC</text>
+  <text class="title" x="108" y="79">PhoneStream.exe</text>
+  <text class="body" x="108" y="101">Captures what the PC plays, without touching OBS</text>
+  <rect class="h1" x="108" y="112" width="150" height="22" rx="11"/>
+  <text class="chip f1" x="183" y="127">4% of one CPU core</text>
+  <rect class="h1" x="266" y="112" width="106" height="22" rx="11"/>
+  <text class="chip f1" x="319" y="127">22 MB memory</text>
+
+  <!-- PC to server -->
+  <path class="arrow a1" d="M64 149 V201" marker-end="url(#head1)"/>
+  <text class="label l1" x="90" y="169">Just one stream from the PC, however many people call</text>
+  <text class="sublabel l1" x="90" y="189">TLS, port 443 · 16 kHz · 260 kbps · 14 ms round trip</text>
+
+  <!-- Your server -->
+  <rect class="box s2" x="20" y="208" width="520" height="256" rx="12"/>
+  <circle class="h2" cx="64" cy="254" r="26"/>
+  <g class="icon s2" transform="translate(64 254) scale(1.3)">
+    <rect x="-12" y="-12" width="24" height="10" rx="2"/>
+    <rect x="-12" y="2" width="24" height="10" rx="2"/>
+  </g>
+  <circle class="f2" cx="54.9" cy="244.9" r="1.8"/>
+  <circle class="f2" cx="54.9" cy="263.1" r="1.8"/>
+  <text class="kicker f2" x="108" y="235">YOUR INTERNET SERVER</text>
+  <text class="title" x="108" y="263">Linux VM: Apache (TLS) → Node.js</text>
+  <text class="body" x="108" y="285">Records the service, keeps each caller's place</text>
+
+  <text class="caption f2" x="44" y="313">Benchmark on one core of a desktop PC (i9-10900X), not the VM</text>
+  <text class="th" x="102" y="337">Callers</text>
+  <text class="th" x="212" y="337">Server CPU</text>
+  <text class="th" x="306" y="337">Memory</text>
+  <text class="th" x="414" y="337">Sent</text>
+  <text class="th" x="512" y="337">Delay</text>
+  <path class="rule" d="M44 345 H516"/>
+  <text class="td" x="102" y="365">10</text>
+  <text class="td" x="212" y="365">4.8%</text>
+  <text class="td" x="306" y="365">61 MB</text>
+  <text class="td" x="414" y="365">0.9 Mbps</text>
+  <text class="td" x="512" y="365">118 ms</text>
+  <path class="rule" d="M44 373 H516"/>
+  <text class="td" x="102" y="389">50</text>
+  <text class="td" x="212" y="389">8.3%</text>
+  <text class="td" x="306" y="389">64 MB</text>
+  <text class="td" x="414" y="389">4.6 Mbps</text>
+  <text class="td" x="512" y="389">120 ms</text>
+  <path class="rule" d="M44 397 H516"/>
+  <text class="td" x="102" y="413">100</text>
+  <text class="td" x="212" y="413">11.6%</text>
+  <text class="td" x="306" y="413">70 MB</text>
+  <text class="td" x="414" y="413">9.3 Mbps</text>
+  <text class="td" x="512" y="413">118 ms</text>
+  <text class="vm" x="44" y="438">Real 1-vCPU internet VM: 100 callers played with no pauses;</text>
+  <text class="vm" x="44" y="455">with 50 callers the whole VM used about 10% CPU, the server 60 MB.</text>
+
+  <!-- Server to Plivo -->
+  <path class="arrow a2" d="M64 471 V505" marker-end="url(#head2)"/>
+  <text class="label l2" x="90" y="493">One WebSocket per call · 8 kHz μ-law · 93 kbps each</text>
+
+  <!-- Plivo, with its monthly cost -->
+  <rect class="box s3" x="20" y="512" width="520" height="268" rx="12"/>
+  <circle class="h3" cx="64" cy="558" r="26"/>
+  <path class="icon s3" transform="translate(64 558) scale(1.3)" d="M-10 7.5 H10 A5 5 0 0 0 10 -2.5 A7.5 7.5 0 0 0 -4 -7.5 A5.5 5.5 0 0 0 -10 0.5 A3.5 3.5 0 0 0 -10 7.5 Z"/>
+  <text class="kicker f3" x="108" y="539">PHONE SERVICE</text>
+  <text class="title" x="108" y="567">Plivo</text>
+  <text class="body" x="108" y="589">Answers each call, plays that caller's stream</text>
+  <rect class="h3" x="108" y="600" width="282" height="22" rx="11"/>
+  <text class="chip f3" x="249" y="615">1 s queued as a cushion against hiccups</text>
+
+  <text class="th" x="102" y="652">Callers</text>
+  <text class="th" x="250" y="652">Minutes a month</text>
+  <text class="th" x="390" y="652">Local number</text>
+  <text class="th" x="512" y="652">Toll-free</text>
+  <path class="rule" d="M44 660 H516"/>
+  <text class="td" x="102" y="680">10</text>
+  <text class="td" x="250" y="680">3,600</text>
+  <text class="td" x="390" y="680">$20.30</text>
+  <text class="td" x="512" y="680">$65.80</text>
+  <path class="rule" d="M44 688 H516"/>
+  <text class="td" x="102" y="704">50</text>
+  <text class="td" x="250" y="704">18,000</text>
+  <text class="td" x="390" y="704">$99.50</text>
+  <text class="td" x="512" y="704">$325.00</text>
+  <path class="rule" d="M44 712 H516"/>
+  <text class="td" x="102" y="728">100</text>
+  <text class="td" x="250" y="728">36,000</text>
+  <text class="td" x="390" y="728">$198.50</text>
+  <text class="td" x="512" y="728">$649.00</text>
+  <text class="note" x="44" y="753">Per month: four 90-minute services, everyone on the whole time. Plivo US,</text>
+  <text class="note" x="44" y="769">Nov 2026: local $0.0055/min + $0.50 number, toll-free $0.018/min + $1 number</text>
+
+  <!-- Plivo to callers -->
+  <path class="arrow a3" d="M64 787 V821" marker-end="url(#head3)"/>
+  <text class="label l3" x="90" y="809">Phone network</text>
+
+  <!-- Callers -->
+  <rect class="box s4" x="20" y="828" width="520" height="118" rx="12"/>
+  <circle class="h4" cx="64" cy="874" r="26"/>
+  <g class="icon s4" transform="translate(64 875) scale(1.3)">
+    <rect x="-8" y="-14" width="16" height="27" rx="3"/>
+    <path d="M-3 8 H3"/>
+  </g>
+  <text class="kicker f4" x="108" y="855">CALLERS</text>
+  <text class="title" x="108" y="883">Any phone, landline or mobile</text>
+  <text class="body" x="108" y="905">Start at the beginning, resume, or press 1 for live</text>
+  <rect class="h4" x="108" y="916" width="316" height="22" rx="11"/>
+  <text class="chip f4" x="266" y="931">Live: about 1.2 s after the room + phone network</text>
+</svg>
